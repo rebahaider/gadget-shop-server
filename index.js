@@ -33,6 +33,17 @@ const dbConnect = async () => {
     client.connect()
     console.log("Database connected successfully");
 
+    // user get method
+
+    app.get("/user", async (req, res) => {
+      const query = { email: req.body.email };
+      const user = await userCollection.findOne(query);
+      if (user) {
+        return res.send({ message: "No user found" });
+      }
+      res.send(result);
+    });
+
     // insert user
     app.post("/users", async (req, res) => {
       const user = req.body;
